@@ -26,6 +26,27 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
   properties: {
     accessTier: 'Hot'
   }
+
+  resource blobServices 'blobServices' = {
+    name: 'default'
+    properties: {
+      deleteRetentionPolicy: {
+        enabled: true
+        days: 30
+      }
+    }
+
+    resource blobContainer 'containers' = {
+      name: 'data'
+      properties: {
+        publicAccess: 'Container'
+      }
+    }
+  }
+
+  resource tableResource 'tableServices' = {
+    name: 'default'
+  }
 }
 
 resource automationAccount 'Microsoft.Automation/automationAccounts@2019-06-01' = {
