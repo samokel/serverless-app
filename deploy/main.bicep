@@ -70,10 +70,6 @@ resource automationRunbook 'Microsoft.Automation/automationAccounts/runbooks@201
     logVerbose: true
     logProgress: true
     runbookType: 'PowerShell'
-    publishContentLink: {
-      uri: 'uri'
-      version: '1.0.0.0'
-    }
     description: 'PowerShell script to put data into Table storage.'
   }
 }
