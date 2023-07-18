@@ -1,9 +1,6 @@
 @description('The Azure region into which the resources should be deployed.')
 param location string = resourceGroup().location
 
-@description('The Azure Tenant Id.')
-param tenantId string = '7c2cecbb-4b12-4725-936b-ece52d4302a3'
-
 @description('The name of the Automation Account to deploy.')
 param automationAccountName string = 'travit-aut-${uniqueString(resourceGroup().id)}'
 
@@ -81,10 +78,10 @@ resource keyVault 'Microsoft.KeyVault/vaults@2019-09-01' = {
     enabledForDeployment: true
     enabledForTemplateDeployment: true
     enabledForDiskEncryption: true
-    // tenantId: tenantId
+    tenantId: '7c2cecbb-4b12-4725-936b-ece52d4302a3'
     accessPolicies: [
       {
-        tenantId: tenantId
+        tenantId: '7c2cecbb-4b12-4725-936b-ece52d4302a3'
         objectId: '8f9bdc89-d45a-420d-9d2a-da49568a316a'
         permissions: {
           keys: [
