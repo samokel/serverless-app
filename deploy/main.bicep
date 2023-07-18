@@ -81,22 +81,22 @@ resource keyVault 'Microsoft.KeyVault/vaults@2019-09-01' = {
     enabledForDeployment: true
     enabledForTemplateDeployment: true
     enabledForDiskEncryption: true
-    tenantId: tenantId
-    // accessPolicies: [
-    //   {
-    //     tenantId: tenantId
-    //     objectId: 'objectId'
-    //     permissions: {
-    //       keys: [
-    //         'get'
-    //       ]
-    //       secrets: [
-    //         'list'
-    //         'get'
-    //       ]
-    //     }
-    //   }
-    // ]
+    // tenantId: tenantId
+    accessPolicies: [
+      {
+        tenantId: tenantId
+        objectId: '8f9bdc89-d45a-420d-9d2a-da49568a316a'
+        permissions: {
+          keys: [
+            'get'
+          ]
+          secrets: [
+            'list'
+            'get'
+          ]
+        }
+      }
+    ]
     sku: {
       name: 'standard'
       family: 'A'
