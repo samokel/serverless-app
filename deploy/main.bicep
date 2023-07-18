@@ -40,11 +40,17 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
       }
     }
   }
+}
 
-  resource tableResource 'tableServices' = {
-    name: 'default'
+resource tableServices 'Microsoft.Storage/storageAccounts/tableServices@2022-09-01' = {
+  name: 'default'
+  parent: storageAccount
+
+  resource tableStorage 'tables@2022-09-01' = {
+    name: 'datastore'
   }
 }
+
 
 resource automationAccount 'Microsoft.Automation/automationAccounts@2019-06-01' = {
   name: automationAccountName

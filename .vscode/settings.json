@@ -1,5 +1,6 @@
 {
     "yaml.schemas": {
         "https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json": "file:///c%3A/Users/samow/VSCode/serverless-app/deploy/azure-pipelines.yml"
-    }
+    },
+    "azureAutomation.directory.basePath": "c:\\Users\\samow"
 }
