@@ -2,7 +2,7 @@
 param location string = resourceGroup().location
 
 @description('The Azure Tenant Id.')
-param tenantId string = subscription().tenantId
+param tenantId string = '7c2cecbb-4b12-4725-936b-ece52d4302a3'
 
 @description('The name of the Automation Account to deploy.')
 param automationAccountName string = 'travit-aut-${uniqueString(resourceGroup().id)}'
