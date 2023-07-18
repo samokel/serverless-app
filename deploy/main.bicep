@@ -1,9 +1,6 @@
 @description('The Azure region into which the resources should be deployed.')
 param location string = resourceGroup().location
 
-// @description('The Azure Tenant Id.')
-// param tenantId string = '7c2cecbb-4b12-4725-936b-ece52d4302a3'
-
 @description('The name of the Automation Account to deploy.')
 param automationAccountName string = 'travit-aut-${uniqueString(resourceGroup().id)}'
 
