@@ -57,27 +57,22 @@ stages:
 
 - stage: Deploy
   jobs:
-  - deployment: DeployWebsite
-    displayName: Deploy website
-    environment: Website
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-            - checkout: self
-            - task: AzureResourceManagerTemplateDeployment@3
-              name: DeployBicepFile
-              displayName: Deploy Bicep file
-              inputs:
-                connectedServiceName: $(ServiceConnectionName)
-                deploymentName: $(Build.BuildNumber)
-                location: $(deploymentDefaultLocation)
-                resourceGroupName: $(ResourceGroupName)
-                csmFile: deploy/main.bicep
-                deploymentOutputs: deploymentOutputs            
-            - bash: |
-                echo "##vso[task.setvariable variable=appServiceAppHostName;isOutput=true]$(echo $DEPLOYMENT_OUTPUTS | jq -r '.appServiceAppHostName.value')"
-              name: SaveDeploymentOutputs
-              displayName: Save deployment outputs into variables
-              env:
-                DEPLOYMENT_OUTPUTS: $(deploymentOutputs)
+  - job: DeployResources
+    displayName: Deploy resources
+    steps:
+      - task: AzureResourceManagerTemplateDeployment@3
+        name: DeployBicepFile
+        displayName: Deploy Bicep file
+        inputs:
+          connectedServiceName: $(ServiceConnectionName)
+          deploymentName: $(Build.BuildNumber)
+          location: $(deploymentDefaultLocation)
+          resourceGroupName: $(ResourceGroupName)
+          csmFile: deploy/main.bicep
+          deploymentOutputs: deploymentOutputs            
+      - bash: |
+          echo "##vso[task.setvariable variable=appServiceAppHostName;isOutput=true]$(echo $DEPLOYMENT_OUTPUTS | jq -r '.appServiceAppHostName.value')"
+        name: SaveDeploymentOutputs
+        displayName: Save deployment outputs into variables
+        env:
+          DEPLOYMENT_OUTPUTS: $(deploymentOutputs)
